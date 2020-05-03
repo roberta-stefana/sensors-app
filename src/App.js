@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import Current from './components/Current';
+import History from './components/History';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+	state = { step: 1 }
+	
+	handleClick = () =>{
+		this.setState({
+			step: 2
+		})
+	}
+
+    render() { 
+		const {step} = this.state;
+
+        return (
+			<div>
+				<button onClick={this.handleClick}>History</button>
+				{step === 1 
+				? <Current/>
+				: <History/>
+				}
+			</div>
+        );
+    }
 }
-
+ 
 export default App;
+
+
