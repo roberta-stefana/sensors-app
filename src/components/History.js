@@ -4,13 +4,13 @@ import Chart from './Chart'
 class History extends Component {
     state = {  }
     render() { 
-        const {lightData} = this.props;
+        const {lightData, temperatureData, humidityData} = this.props;
 
         return (
             <div>
-                <Chart lightData={lightData} flag="DAY"/>
-                <Chart lightData={lightData} flag="MONTH"/>
-                <Chart lightData={lightData} flag="YEAR"/>
+                <Chart lightData={lightData} temperatureData={temperatureData} humidityData={humidityData} flag="DAY"/>
+                <Chart lightData={lightData} temperatureData={temperatureData} humidityData={humidityData} flag="MONTH"/>
+                <Chart lightData={lightData} temperatureData={temperatureData} humidityData={humidityData} flag="YEAR"/>
             </div>
         );
     }
