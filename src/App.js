@@ -10,6 +10,8 @@ class App extends Component {
 	state = { 
 		step: 1, 
 		lightData: null,
+		temperatureData: null,
+		humidityaData: null,
 	}
 	
 	handleClick = (newStep) =>{
@@ -31,11 +33,34 @@ class App extends Component {
 				})
             }   
 		});
+
+		let temperatureRef = firebase.database().ref('/temperature');
+        temperatureRef.on('value', snapshot => {
+			let data = snapshot.val();
+            if(data !== null){
+				let tempData = Object.values(data);
+				this.setState({
+					temperatureData: tempData,
+				})
+            }   
+		});
+
+		let humidityRef = firebase.database().ref('/humidity');
+        humidityRef.on('value', snapshot => {
+			let data = snapshot.val();
+            if(data !== null){
+				let humData = Object.values(data);
+				console.log('HUM',humData);
+				this.setState({
+					humidityData: humData,
+				})
+            }   
+		});
 		
     }
 
     render() { 
-		const {step, lightData} = this.state;
+		const {step, lightData, temperatureData, humidityData} = this.state;
 		const {classes} = this.props;
 
         return (
@@ -48,8 +73,8 @@ class App extends Component {
 				</AppBar>
 				<Container className={classes.container}>
 					{step === 1 
-					? <Current lightData={lightData}/>
-					: <History lightData={lightData}/>
+					? <Current/>
+					: <History lightData={lightData} temperatureData={temperatureData} humidityData={humidityData}/>
 					}
 				</Container>
 			</React.Fragment>
