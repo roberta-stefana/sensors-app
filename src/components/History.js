@@ -5,9 +5,13 @@ class History extends Component {
     state = {  }
     render() { 
         const {lightData} = this.props;
-        
-        return (  
-            <Chart lightData={lightData}/>
+
+        return (
+            <div>
+                <Chart lightData={lightData} flag="DAY"/>
+                <Chart lightData={lightData} flag="MONTH"/>
+                <Chart lightData={lightData} flag="YEAR"/>
+            </div>
         );
     }
 }
