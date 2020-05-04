@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import './App.css';
 import Current from './components/Current';
 import History from './components/History';
 import * as firebase from 'firebase';
 import FirebaseConfig from './constants/FirebaseConfig'
+import {Container, AppBar, Toolbar, Button, withStyles} from '@material-ui/core';
+import styles from './styles'
 
 class App extends Component {
 	state = { 
@@ -11,14 +12,14 @@ class App extends Component {
 		lightData: null,
 	}
 	
-	handleClick = () =>{
+	handleClick = (newStep) =>{
 		this.setState({
-			step: 2
+			step: newStep
 		})
 	}
 
 	async componentDidMount(){
-        console.log("INITIALIZE")
+		console.log("INITIALIZE")
         await firebase.initializeApp(FirebaseConfig);
 		let lightRef = firebase.database().ref('/light');
         lightRef.on('value', snapshot => {
@@ -35,19 +36,27 @@ class App extends Component {
 
     render() { 
 		const {step, lightData} = this.state;
+		const {classes} = this.props;
 
         return (
-			<div>
-				<button onClick={this.handleClick}>History</button>
-				{step === 1 
-				? <Current lightData={lightData}/>
-				: <History lightData={lightData}/>
-				}
-			</div>
+			<React.Fragment>
+				<AppBar className={classes.appbar}>
+					<Toolbar>
+						<Button onClick={()=>this.handleClick(2)}>History</Button>
+						<Button onClick={()=>this.handleClick(1)}>Current</Button>
+					</Toolbar>
+				</AppBar>
+				<Container className={classes.container}>
+					{step === 1 
+					? <Current lightData={lightData}/>
+					: <History lightData={lightData}/>
+					}
+				</Container>
+			</React.Fragment>
         );
     }
 }
  
-export default App;
+export default withStyles(styles)(App);
 
 
