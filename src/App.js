@@ -12,6 +12,9 @@ class App extends Component {
 		lightData: null,
 		temperatureData: null,
 		humidityaData: null,
+		currentTemperature: 0,
+		currentLight: 0,
+		currentHumidity: 0,
 	}
 	
 	handleClick = (newStep) =>{
@@ -28,6 +31,7 @@ class App extends Component {
 			let data = snapshot.val();
             if(data !== null){
 				let lightData = Object.values(data);
+				console.log(lightData)
 				this.setState({
 					lightData: lightData,
 				})
@@ -50,7 +54,6 @@ class App extends Component {
 			let data = snapshot.val();
             if(data !== null){
 				let humData = Object.values(data);
-				console.log('HUM',humData);
 				this.setState({
 					humidityData: humData,
 				})
@@ -60,21 +63,21 @@ class App extends Component {
     }
 
     render() { 
-		const {step, lightData, temperatureData, humidityData} = this.state;
+		const {step, lightData, temperatureData, humidityData, currentHumidity, currentLight, currentTemperature} = this.state;
 		const {classes} = this.props;
 
         return (
 			<React.Fragment>
 				<AppBar className={classes.appbar}>
 					<Toolbar>
-						<Button onClick={()=>this.handleClick(2)}>History</Button>
-						<Button onClick={()=>this.handleClick(1)}>Current</Button>
+						<Button onClick={()=>this.handleClick(2)} className={classes.button}>History</Button>
+						<Button onClick={()=>this.handleClick(1)} className={classes.button}>Current</Button>
 					</Toolbar>
 				</AppBar>
 				<Container className={classes.container}>
 					{step === 1 
-					? <Current/>
-					: <History lightData={lightData} temperatureData={temperatureData} humidityData={humidityData}/>
+					? <Current light={currentLight} temperature={currentTemperature} humidity={currentHumidity} classes={classes}/>
+					: <History lightData={lightData} temperatureData={temperatureData} humidityData={humidityData} classes={classes}/>
 					}
 				</Container>
 			</React.Fragment>
