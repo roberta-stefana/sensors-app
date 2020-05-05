@@ -31,7 +31,6 @@ class App extends Component {
 			let data = snapshot.val();
             if(data !== null){
 				let lightData = Object.values(data);
-				console.log(lightData)
 				this.setState({
 					lightData: lightData,
 				})
@@ -56,6 +55,40 @@ class App extends Component {
 				let humData = Object.values(data);
 				this.setState({
 					humidityData: humData,
+				})
+            }   
+		});
+
+		let humidity = firebase.database().ref('/humidityCurrentValue');
+        humidity.on('value', snapshot => {
+			let data = snapshot.val();
+			console.log(data)
+            if(data !== null){
+				let humidityData = Object.values(data);
+				this.setState({
+					currentHumidity: humidityData[0],
+				})
+            }   
+		});
+
+		let temperature = firebase.database().ref('/temperatureCurrentValue');
+        temperature.on('value', snapshot => {
+			let data = snapshot.val();
+            if(data !== null){
+				let temperatureData = Object.values(data);
+				this.setState({
+					currentTemperature: temperatureData[0],
+				})
+            }   
+		});
+
+		let light = firebase.database().ref('/lightCurrentValue');
+        light.on('value', snapshot => {
+			let data = snapshot.val();
+            if(data !== null){
+				let lightData = Object.values(data);
+				this.setState({
+					currentLight: lightData[0],
 				})
             }   
 		});

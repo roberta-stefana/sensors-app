@@ -41,6 +41,9 @@ const styles = createStyles({
     },
     button: {
         color: "#ffffff"
+    },
+    chartContainer:{
+        display: 'grid'
     }
 
 });
