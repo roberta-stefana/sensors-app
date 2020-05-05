@@ -19,10 +19,71 @@ import {
     ChartTitle
 } from '@progress/kendo-react-charts';
 
-const categories = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'];
+const DAY = "DAY";
+const MONTH = "MONTH";
+const YEAR = "YEAR";
+
+const days = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
+const months = ['January'.toUpperCase(), 'February'.toUpperCase(), 'March'.toUpperCase(), 'April'.toUpperCase(), 'May'.toUpperCase(),
+    'June'.toUpperCase(), 'July'.toUpperCase(), 'August'.toUpperCase(), 'September'.toUpperCase(), 'October'.toUpperCase(),
+    'November'.toUpperCase(), 'December'.toUpperCase()];
+const years = [2017, 2018, 2019, 2020];
 
 class ChartComponent extends React.Component {
+
+    average = list => list.reduce((prev, curr) => prev + curr) / list.length;
+
+    state = {
+        light: [],
+        temperature: [],
+        humidity: [],
+        categories: []
+    };
+
+    createData = () => {
+        const {lightData, temperatureData, humidityData, flag} = this.props;
+        let light = [], temperature = [], humidity = [];
+        console.log("lightData");
+        console.log(lightData);
+
+        let array;
+        switch (flag) {
+            case DAY:
+                array = days;
+                break;
+            case MONTH:
+                array = months;
+                break;
+            case YEAR:
+                array = years;
+                break;
+        }
+        array.map((category) => {
+            let values = [];
+            lightData.map((x) => {
+                if (x.date.day == category || x.date.month == category || x.date.year == category) {
+                    values.push(x.value);
+                }
+            });
+            let averageValue;
+            if (values.length !== 0) {
+                averageValue = this.average(values);
+                light.push(averageValue);
+            }
+        });
+        this.setState({
+            light: light,
+            categories: array
+        })
+    }
+
     render() {
+        const {lightData, temperatureData, humidityData, flag} = this.props;
+        const {light, humidity, temperature, categories} = this.state;
+
+        if (lightData !== undefined || lightData !== null)
+            this.createData();
+
         return (
             <div>
                 <Chart>
