@@ -23,10 +23,8 @@ const DAY = "DAY";
 const MONTH = "MONTH";
 const YEAR = "YEAR";
 
-const days = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
-const months = ['January'.toUpperCase(), 'February'.toUpperCase(), 'March'.toUpperCase(), 'April'.toUpperCase(), 'May'.toUpperCase(),
-    'June'.toUpperCase(), 'July'.toUpperCase(), 'August'.toUpperCase(), 'September'.toUpperCase(), 'October'.toUpperCase(),
-    'November'.toUpperCase(), 'December'.toUpperCase()];
+const days = ['M', 'T', 'W', 'T', 'F', 'S', 'SUN'];
+const months = ['J', 'F', 'M', 'A', 'M','J', 'J', 'A', 'S', 'O','N', 'D'];
 const years = [2017, 2018, 2019, 2020];
 
 class ChartComponent extends React.Component {
@@ -37,25 +35,28 @@ class ChartComponent extends React.Component {
         light: [],
         temperature: [],
         humidity: [],
-        categories: []
+        categories: [],
+        title: '',
     };
 
-    createData = () => {
+    componentDidMount(){
         const {lightData, temperatureData, humidityData, flag} = this.props;
         let light = [], temperature = [], humidity = [];
-        console.log("lightData");
-        console.log(lightData);
+        let title;
 
         let array;
         switch (flag) {
             case DAY:
                 array = days;
+                title = 'DAYS'
                 break;
             case MONTH:
                 array = months;
+                title='MONTHS'
                 break;
             case YEAR:
                 array = years;
+                title = 'YEARS'
                 break;
         }
         array.map((category) => {
@@ -71,30 +72,61 @@ class ChartComponent extends React.Component {
                 light.push(averageValue);
             }
         });
+
+        array.map((category) => {
+            let values = [];
+            temperatureData.map((x) => {
+                if (x.date.day == category || x.date.month == category || x.date.year == category) {
+                    values.push(x.value);
+                }
+            });
+            let averageValue;
+            if (values.length !== 0) {
+                averageValue = this.average(values);
+                temperature.push(averageValue);
+            }
+        });
+
+        array.map((category) => {
+            let values = [];
+            humidityData.map((x) => {
+                if (x.date.day == category || x.date.month == category || x.date.year == category) {
+                    values.push(x.value);
+                }
+            });
+            let averageValue;
+            if (values.length !== 0) {
+                averageValue = this.average(values);
+                humidity.push(averageValue);
+            }
+        });
+        console.log(light)
+        console.log(temperature)
+        console.log(humidity)
         this.setState({
-            light: light,
-            categories: array
+            light:light,
+            humidity: humidity,
+            temperature: temperature,
+            categories: array,
+            title: title,
         })
+
     }
 
     render() {
-        const {lightData, temperatureData, humidityData, flag} = this.props;
-        const {light, humidity, temperature, categories} = this.state;
-
-        if (lightData !== undefined || lightData !== null)
-            this.createData();
+        const {light, humidity, temperature, categories, title} = this.state;
 
         return (
             <div>
                 <Chart>
                     <ChartTitle text="Units sold"/>
                     <ChartCategoryAxis>
-                        <ChartCategoryAxisItem title={{text: 'Months'}} categories={categories}/>
+                        <ChartCategoryAxisItem title={title} categories={categories}/>
                     </ChartCategoryAxis>
                     <ChartSeries>
-                        <ChartSeriesItem type="line" data={[123, 276, 310, 212, 240, 156, 98]}/>
-                        <ChartSeriesItem type="line" data={[165, 210, 287, 144, 190, 167, 212]}/>
-                        <ChartSeriesItem type="line" data={[56, 140, 195, 46, 123, 78, 95]}/>
+                        <ChartSeriesItem type="line" data={light}/>
+                        <ChartSeriesItem type="line" data={humidity}/>
+                        <ChartSeriesItem type="line" data={temperature}/>
                     </ChartSeries>
                 </Chart>
             </div>

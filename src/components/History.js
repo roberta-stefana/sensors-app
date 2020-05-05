@@ -8,9 +8,13 @@ class History extends Component {
 
         return (
             <div>
-                <ChartComponent lightData={lightData} temperatureData={temperatureData} humidityData={humidityData} flag="DAY"/>
-                <ChartComponent lightData={lightData} temperatureData={temperatureData} humidityData={humidityData} flag="MONTH"/>
-                <ChartComponent lightData={lightData} temperatureData={temperatureData} humidityData={humidityData} flag="YEAR"/>
+                { lightData !== undefined && temperatureData!== undefined && humidityData !== undefined &&
+                <div>
+                    <ChartComponent lightData={lightData} temperatureData={temperatureData} humidityData={humidityData} flag="DAY"/>
+                    <ChartComponent lightData={lightData} temperatureData={temperatureData} humidityData={humidityData} flag="MONTH"/>
+                    <ChartComponent lightData={lightData} temperatureData={temperatureData} humidityData={humidityData} flag="YEAR"/>
+                </div>
+            }
             </div>
         );
     }
