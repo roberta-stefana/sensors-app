@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
-import Chart from './Chart'
+import ChartComponent from './ChartComponent'
 
 class History extends Component {
     state = {  }
-    render() { 
+    render() {
         const {lightData, temperatureData, humidityData} = this.props;
 
         return (
             <div>
-                <Chart lightData={lightData} temperatureData={temperatureData} humidityData={humidityData} flag="DAY"/>
-                <Chart lightData={lightData} temperatureData={temperatureData} humidityData={humidityData} flag="MONTH"/>
-                <Chart lightData={lightData} temperatureData={temperatureData} humidityData={humidityData} flag="YEAR"/>
+                <ChartComponent lightData={lightData} temperatureData={temperatureData} humidityData={humidityData} flag="DAY"/>
+                <ChartComponent lightData={lightData} temperatureData={temperatureData} humidityData={humidityData} flag="MONTH"/>
+                <ChartComponent lightData={lightData} temperatureData={temperatureData} humidityData={humidityData} flag="YEAR"/>
             </div>
         );
     }
 }
- 
+
 export default History;
