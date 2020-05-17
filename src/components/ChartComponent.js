@@ -23,8 +23,8 @@ const DAY = "DAY";
 const MONTH = "MONTH";
 const YEAR = "YEAR";
 
-const days = ['M', 'T', 'W', 'T', 'F', 'S', 'SUN'];
-const months = ['J', 'F', 'M', 'A', 'M','J', 'J', 'A', 'S', 'O','N', 'D'];
+const days = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
+const months = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY','JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER','NOVEMBER', 'DECEMBER'];
 const years = [2017, 2018, 2019, 2020];
 
 class ChartComponent extends React.Component {
@@ -43,26 +43,30 @@ class ChartComponent extends React.Component {
         const {lightData, temperatureData, humidityData, flag} = this.props;
         let light = [], temperature = [], humidity = [];
         let title;
+        let categories;
 
         let array;
         switch (flag) {
             case DAY:
                 array = days;
                 title = 'DAYS'
+                categories = ['M', 'T', 'W', 'T', 'F', 'S', 'S']
                 break;
             case MONTH:
                 array = months;
                 title='MONTHS'
+                categories = ['J', 'F', 'M', 'A', 'M','J', 'J', 'A', 'S', 'O','N', 'D'];
                 break;
             case YEAR:
                 array = years;
                 title = 'YEARS'
+                categories = [2017, 2018, 2019, 2020];
                 break;
         }
         array.map((category) => {
             let values = [];
             lightData.map((x) => {
-                if (x.date.day == category || x.date.month == category || x.date.year == category) {
+                if (x.date.dayOfWeek == category || x.date.month == category || x.date.year == category) {
                     values.push(x.value);
                 }
             });
@@ -76,7 +80,7 @@ class ChartComponent extends React.Component {
         array.map((category) => {
             let values = [];
             temperatureData.map((x) => {
-                if (x.date.day == category || x.date.month == category || x.date.year == category) {
+                if (x.date.dayOfWeek == category || x.date.month == category || x.date.year == category) {
                     values.push(x.value);
                 }
             });
@@ -90,7 +94,7 @@ class ChartComponent extends React.Component {
         array.map((category) => {
             let values = [];
             humidityData.map((x) => {
-                if (x.date.day == category || x.date.month == category || x.date.year == category) {
+                if (x.date.dayOfWeek == category || x.date.month == category || x.date.year == category) {
                     values.push(x.value);
                 }
             });
@@ -100,14 +104,11 @@ class ChartComponent extends React.Component {
                 humidity.push(averageValue);
             }
         });
-        console.log(light)
-        console.log(temperature)
-        console.log(humidity)
         this.setState({
             light:light,
             humidity: humidity,
             temperature: temperature,
-            categories: array,
+            categories: categories,
             title: title,
         })
 
@@ -119,7 +120,7 @@ class ChartComponent extends React.Component {
         return (
             <div>
                 <Chart>
-                    <ChartTitle text="Units sold"/>
+                    <ChartTitle text={title}/>
                     <ChartCategoryAxis>
                         <ChartCategoryAxisItem title={title} categories={categories}/>
                     </ChartCategoryAxis>
