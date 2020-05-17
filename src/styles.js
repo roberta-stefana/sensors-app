@@ -44,6 +44,9 @@ const styles = createStyles({
     },
     chartContainer:{
         display: 'grid'
+    },
+    chartDiv:{
+        marginBotton: '30px',
     }
 
 });
