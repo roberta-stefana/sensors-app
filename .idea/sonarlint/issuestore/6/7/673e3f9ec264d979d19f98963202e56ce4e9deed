@@ -1,0 +1,21 @@
+
+^javascript:S1854R"6Remove this useless assignment to variable "humidity".(ı öıÿÿÿÿ8´Ëä¢.
+ajavascript:S1854R"9Remove this useless assignment to variable "temperature".(ı öıÿÿÿÿ8´Ëä¢.
+bjavascript:S1854,":Remove this useless assignment to variable "humidityData".(í§‚€úÿÿÿÿ8™“Œ¢.
+_javascript:S1481-"<Remove the declaration of the unused 'temperature' variable.(óúÔ¢8ƒüÎ¢.
+fjavascript:S2259="CTypeError can be thrown as "array" might be null or undefined here.(¤§¹§8Á¡¼¢.
+ejavascript:S1854,"=Remove this useless assignment to variable "temperatureData".(í§‚€úÿÿÿÿ8™“Œ¢.
+ejavascript:S1481,"=Remove the declaration of the unused 'humidityData' variable.(í§‚€úÿÿÿÿ8™“Œ¢.
+\javascript:S1481-"9Remove the declaration of the unused 'humidity' variable.(óúÔ¢8À¹Î¢.
+Zjavascript:S1854Q"2Remove this useless assignment to variable "flag".(í§‚€úÿÿÿÿ8™“Œ¢.
+mjavascript:S3403T"JRemove this "!==" check; it will always be true. Did you mean to use "!="?(„î÷Ç8µæ¢.
+hjavascript:S1481Q"@Remove the declaration of the unused 'temperatureData' variable.(í§‚€úÿÿÿÿ8™“Œ¢.
+[javascript:S1854R"3Remove this useless assignment to variable "light".(ı öıÿÿÿÿ8´Ëä¢.
+ajavascript:S1481R"9Remove the declaration of the unused 'humidity' variable.(ı öıÿÿÿÿ8´Ëä¢.
+hjavascript:S1481,"@Remove the declaration of the unused 'temperatureData' variable.(í§‚€úÿÿÿÿ8™“Œ¢.
+djavascript:S1481R"<Remove the declaration of the unused 'temperature' variable.(ı öıÿÿÿÿ8´Ëä¢.
+bjavascript:S1854Q":Remove this useless assignment to variable "humidityData".(í§‚€úÿÿÿÿ8™“Œ¢.
+ejavascript:S1481Q"=Remove the declaration of the unused 'humidityData' variable.(í§‚€úÿÿÿÿ8™“Œ¢.
+^javascript:S1481R"6Remove the declaration of the unused 'light' variable.(ı öıÿÿÿÿ8´Ëä¢.
+ejavascript:S1854Q"=Remove this useless assignment to variable "temperatureData".(í§‚€úÿÿÿÿ8™“Œ¢.
+]javascript:S1481Q"5Remove the declaration of the unused 'flag' variable.(í§‚€úÿÿÿÿ8™“Œ¢.
