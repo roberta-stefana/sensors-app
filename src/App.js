@@ -24,7 +24,6 @@ class App extends Component {
 	}
 
 	async componentDidMount(){
-		console.log("INITIALIZE")
         await firebase.initializeApp(FirebaseConfig);
 		let lightRef = firebase.database().ref('/light');
         lightRef.on('value', snapshot => {
@@ -62,7 +61,6 @@ class App extends Component {
 		let humidity = firebase.database().ref('/humidityCurrentValue');
         humidity.on('value', snapshot => {
 			let data = snapshot.val();
-			console.log(data)
             if(data !== null){
 				let humidityData = Object.values(data);
 				this.setState({

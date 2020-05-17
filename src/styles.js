@@ -47,6 +47,21 @@ const styles = createStyles({
     },
     chartDiv:{
         margin: '40px',
+    },
+    temp:{
+        backgroundColor: '#4CAF50',
+    },
+    hum:{
+        backgroundColor: '#2196F3',
+    },
+    light:{
+        backgroundColor: 'rgb(63, 81, 181)',
+    },
+    legend:{
+        width: '300px',
+        display: 'flex',
+        justifyContent: 'space-evenly',
+        marginLeft: '30px'
     }
 
 });
